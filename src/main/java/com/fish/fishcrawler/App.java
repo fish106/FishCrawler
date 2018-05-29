@@ -1,7 +1,5 @@
 package com.fish.fishcrawler;
 
-import com.fish.dao.DBTool;
-import com.fish.dao.testdao;
 import com.fish.util.CrawlerHelper;
 import edu.uci.ics.crawler4j.crawler.CrawlConfig;
 import edu.uci.ics.crawler4j.crawler.CrawlController;
@@ -15,7 +13,6 @@ public class App
 {
     private static final Logger logger = LoggerFactory.getLogger(App.class);
     public static void main(String[] args) throws Exception {
-        //String abc = DBTool.getSession().getMapper(testdao.class).GetAllEmployees();
         logger.info("Start Crawler...");
         String crawlStorageFolder = CrawlerHelper.crawlStorageFolder;//"D:\\Project\\crawler";
         int numberOfCrawlers = 1;
