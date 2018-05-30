@@ -1,5 +1,6 @@
 package com.fish.util;
 
+import com.fish.bean.SysConstants;
 import edu.uci.ics.crawler4j.crawler.CrawlConfig;
 import edu.uci.ics.crawler4j.crawler.CrawlController;
 import edu.uci.ics.crawler4j.fetcher.PageFetcher;
@@ -12,13 +13,12 @@ import java.util.Properties;
 
 public class CrawlerHelper
 {
-    public static String crawlStorageFolder;//"D:\\Project\\crawler";
     static {
         try {
             Properties prop = new Properties();
             InputStream in = Object.class.getResourceAsStream("/appconfig.properties");
             prop.load(in);
-            crawlStorageFolder = prop.getProperty("Root_Storage_Folder").trim();
+            SysConstants.CRAWL_STORAGE_PATH = prop.getProperty("Root_Storage_Folder").trim();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -27,7 +27,7 @@ public class CrawlerHelper
     public static CrawlConfig GetConfig(String folderName, Integer connectionTimeout, Integer socketTimeout, String userAgent)
     {
         CrawlConfig config=new CrawlConfig();
-        config.setCrawlStorageFolder(crawlStorageFolder+"\\"+folderName);
+        config.setCrawlStorageFolder(SysConstants.CRAWL_STORAGE_PATH+"\\"+folderName);
         config.setPolitenessDelay(1000);
         config.setMaxDepthOfCrawling(1);
         config.setMaxPagesToFetch(1000);
