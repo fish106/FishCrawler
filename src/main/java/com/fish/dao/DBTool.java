@@ -9,7 +9,7 @@ import java.io.Reader;
 
 public class DBTool
 {
-    public static SqlSessionFactory sessionFactory;
+    private static SqlSessionFactory sessionFactory;
     static {
         try {
             // 使用MyBatis提供的Resources类加载mybatis的配置文件

@@ -8,7 +8,7 @@ public enum Seller
     private String name;
 
     // 构造函数，枚举类型只能为私有
-    private Seller(int code, String name) {
+    Seller(int code, String name) {
         this.setCode(code);
         this.setName(name);
     }

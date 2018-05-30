@@ -18,24 +18,14 @@ import org.jsoup.nodes.Document;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class JDCrawler extends WebCrawler
 {
-    private static final Pattern URL_PATTERN =  Pattern.compile("-\\d+");
     private String itemTitle = "";
     @Override
     public boolean shouldVisit(Page referringPage, WebURL url) {
         String href = url.getURL().toLowerCase();
-        boolean visitUrl = href.endsWith("2002883.html") || href.endsWith("2002883");
-        // Ignore the url if it has an extension that matches our defined set of image extensions.
-        if (URL_PATTERN.matcher(href).find() && visitUrl) {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return href.endsWith("2002883.html") || href.endsWith("2002883");
     }
 
     @Override
@@ -46,8 +36,7 @@ public class JDCrawler extends WebCrawler
             String html = htmlParseData.getHtml();
             String text=htmlParseData.getText();
             Document doc = Jsoup.parse(html);
-            String itemname =doc.select("div.sku-name").text();
-            itemTitle=itemname;
+            itemTitle =doc.select("div.sku-name").text();
             /*Elements eles1 = doc.select("div.pls.favatar");
             HashSet<String> usernameSet=new HashSet<String>();
             for(Element item:eles1)
@@ -72,13 +61,17 @@ public class JDCrawler extends WebCrawler
             JavaType javaType = mapper.getTypeFactory().constructCollectionType(ArrayList.class, JDPrice.class);
             try
             {
-                List<JDPrice> jdPriceList=(List<JDPrice>)mapper.readValue(page.getContentData(), javaType);
+                List<JDPrice> jdPriceList=mapper.readValue(page.getContentData(), javaType);
                 JDPrice jdprice=jdPriceList.get(0);
                 ItemPrice itemprice= new ItemPrice();
                 itemprice.setItemId(Item.KINDLE_PW_BLK.getCode());
                 itemprice.setItemName(Item.KINDLE_PW_BLK.getName());
                 itemprice.setSellerItemName(itemTitle);
                 String price = jdprice.getTpp()!=null?jdprice.getTpp():jdprice.getP();
+                if(price == null || price.equals(""))
+                {
+                    return;
+                }
                 price=price.replaceAll("[^\\d.]+","");
                 itemprice.setPrice(Double.parseDouble(price));
                 itemprice.setSellerId(Seller.JD.getCode());

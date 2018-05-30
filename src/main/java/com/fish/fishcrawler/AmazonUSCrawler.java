@@ -13,24 +13,12 @@ import edu.uci.ics.crawler4j.url.WebURL;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import java.util.regex.Pattern;
-
 public class AmazonUSCrawler extends WebCrawler
 {
-    private static final Pattern URL_PATTERN =  Pattern.compile("-\\d+");
-
     @Override
     public boolean shouldVisit(Page referringPage, WebURL url) {
         String href = url.getURL();
-        boolean visitUrl = href.endsWith("B00OQVZDJM") && (href.indexOf("ask") == -1) && (href.indexOf("customer-reviews") == -1);
-        // Ignore the url if it has an extension that matches our defined set of image extensions.
-        if (visitUrl) {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return href.endsWith("B00OQVZDJM") && !href.contains("ask") && !href.contains("customer-reviews");
     }
 
     @Override
@@ -45,6 +33,10 @@ public class AmazonUSCrawler extends WebCrawler
                 Document doc = Jsoup.parse(html);
                 String title = doc.select("#productTitle").text();
                 String usdprice = doc.select("#priceblock_ourprice").text();
+                if(usdprice.equals(""))
+                {
+                    return;
+                }
                 usdprice = usdprice.replaceAll("[^\\d.]+", "");
                 double price = Double.parseDouble(usdprice) * SysConstants.USD_EX_RATE;
 

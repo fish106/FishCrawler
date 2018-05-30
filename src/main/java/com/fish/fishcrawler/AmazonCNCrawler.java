@@ -12,24 +12,14 @@ import edu.uci.ics.crawler4j.url.WebURL;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import java.util.regex.Pattern;
-
 public class AmazonCNCrawler extends WebCrawler
 {
-    private static final Pattern URL_PATTERN =  Pattern.compile("-\\d+");
-
+    private static String sellerItemId="";
     @Override
     public boolean shouldVisit(Page referringPage, WebURL url) {
         String href = url.getURL();
-        boolean visitUrl = href.endsWith("B00QJDOLIO") && (href.indexOf("product-reviews") == -1);
-        // Ignore the url if it has an extension that matches our defined set of image extensions.
-        if (URL_PATTERN.matcher(href).find() && visitUrl) {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return href.endsWith("B00QJDOLIO") && !href.contains("product-reviews") && !href.contains("customer-reviews")
+                && !href.contains("questions");
     }
 
     @Override
@@ -42,6 +32,10 @@ public class AmazonCNCrawler extends WebCrawler
             Document doc = Jsoup.parse(html);
             String title=doc.select("#productTitle").text();
             String price =doc.select("#priceblock_ourprice").text();
+            if(price.equals(""))
+            {
+                return;
+            }
             price=price.replaceAll("[^\\d.]+","");
 
             ItemPrice itemprice= new ItemPrice();
@@ -55,23 +49,6 @@ public class AmazonCNCrawler extends WebCrawler
             DBTool.getSession().getMapper(ItemPriceDAO.class).AddPriceLog(itemprice);
             DBTool.getSession().commit();
             logger.info(itemprice.toString());
-            /*Elements eles1 = doc.select("div.pls.favatar");
-            HashSet<String> usernameSet=new HashSet<String>();
-            for(Element item:eles1)
-            {
-                String username=item.select("a[data-title=用户名]").text();
-                if(usernameSet.contains(username))
-                {
-                    continue;
-                }
-                usernameSet.add(username);
-                logger.debug("UserName:{}",username);
-                logger.debug("UserImageUrl:{}",item.select("img[nodata-echo=\"yes\"]").attr("src"));
-                logger.debug("HomePage:{}",item.baseUri()+item.select("a[data-title=用户名]").attr("href"));
-                logger.debug("Points:{}",item.select("dl.cl").select("dd").get(1).text());
-            }
-            usernameSet.clear();*/
         }
-
     }
 }

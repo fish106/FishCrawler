@@ -50,7 +50,6 @@
     </environments>
 
     <mappers>
-        <mapper resource="mapper/test.xml"/>
         <mapper resource="mapper/ItemPriceDAO.xml"/>
     </mappers>
 

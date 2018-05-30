@@ -24,10 +24,10 @@ public class CrawlerHelper
         }
     }
 
-    public CrawlConfig GetConfig(String folderName, Integer connectionTimeout, Integer socketTimeout)
+    public static CrawlConfig GetConfig(String folderName, Integer connectionTimeout, Integer socketTimeout, String userAgent)
     {
         CrawlConfig config=new CrawlConfig();
-        config.setCrawlStorageFolder(crawlStorageFolder+"\\amazonjp");
+        config.setCrawlStorageFolder(crawlStorageFolder+"\\"+folderName);
         config.setPolitenessDelay(1000);
         config.setMaxDepthOfCrawling(1);
         config.setMaxPagesToFetch(1000);
@@ -35,19 +35,33 @@ public class CrawlerHelper
         config.setResumableCrawling(false);
         config.setConnectionTimeout(connectionTimeout);
         config.setSocketTimeout(socketTimeout);
+        if(userAgent != null && !userAgent.equals(""))
+        {
+            config.setUserAgentString(userAgent);
+        }
         return config;
     }
 
-    public CrawlConfig GetConfig(String folderName)
+    public static CrawlConfig GetConfig(String folderName, Integer connectionTimeout,Integer socketTimeout)
     {
-        return this.GetConfig(folderName,20000,30000);
+        return GetConfig(folderName,connectionTimeout,socketTimeout,"");
+    }
+    public static CrawlConfig GetConfig(String folderName, String userAgent)
+    {
+        return GetConfig(folderName,20000,30000, userAgent);
     }
 
-    public CrawlController GetController(CrawlConfig crawlConfig)
+    public static CrawlConfig GetConfig(String folderName)
+    {
+        return GetConfig(folderName,20000,30000,"");
+    }
+
+    public static CrawlController GetController(CrawlConfig crawlConfig, boolean useRobotstxt)
     {
         PageFetcher pageFetcher = new PageFetcher(crawlConfig);
         RobotstxtConfig robotstxtConfig = new RobotstxtConfig();
         RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
+        robotstxtConfig.setEnabled(useRobotstxt);
         CrawlController crawlController = null;
         try
         {

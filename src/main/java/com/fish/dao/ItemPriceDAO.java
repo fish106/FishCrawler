@@ -4,5 +4,5 @@ import com.fish.bean.ItemPrice;
 
 public interface ItemPriceDAO
 {
-    public Integer AddPriceLog(ItemPrice itemPrice);
+    Integer AddPriceLog(ItemPrice itemPrice);
 }
