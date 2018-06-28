@@ -14,7 +14,6 @@ import org.jsoup.nodes.Document;
 
 public class AmazonCNCrawler extends WebCrawler
 {
-    private static String sellerItemId="";
     @Override
     public boolean shouldVisit(Page referringPage, WebURL url) {
         String href = url.getURL();
