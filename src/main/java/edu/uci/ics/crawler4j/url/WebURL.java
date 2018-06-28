@@ -1,4 +1,4 @@
-/**
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -82,12 +82,14 @@ public class WebURL implements Serializable {
                 domain = parts[parts.length - 3] + "." + domain;
                 limit = 3;
             }
+            StringBuilder sb = new StringBuilder();
             for (int i = 0; i < (parts.length - limit); i++) {
-                if (!subDomain.isEmpty()) {
-                    subDomain += ".";
+                if (sb.length() != 0) {
+                    sb.append(".");
                 }
-                subDomain += parts[i];
+                sb.append(parts[i]);
             }
+            subDomain = sb.toString();
         }
         path = url.substring(domainEndIdx);
         int pathEndIdx = path.indexOf('?');

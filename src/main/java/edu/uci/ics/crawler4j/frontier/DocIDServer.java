@@ -1,4 +1,4 @@
-/**
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -68,7 +68,7 @@ public class DocIDServer {
      */
     public int getDocId(String url) {
         synchronized (mutex) {
-            OperationStatus result = null;
+            OperationStatus result;
             DatabaseEntry value = new DatabaseEntry();
             try {
                 DatabaseEntry key = new DatabaseEntry(url.getBytes());

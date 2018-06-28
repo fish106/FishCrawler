@@ -66,7 +66,7 @@ public class BinaryParseData implements ParseData {
 
         try {
             TransformerHandler handler =
-                getTransformerHandler(outputStream, DEFAULT_OUTPUT_FORMAT, DEFAULT_ENCODING);
+                getTransformerHandler(outputStream);
             AUTO_DETECT_PARSER.parse(inputStream, handler, new Metadata(), context);
 
             // Hacking the following line to remove Tika's inserted DocType
@@ -80,21 +80,16 @@ public class BinaryParseData implements ParseData {
     /**
      * Returns a transformer handler that serializes incoming SAX events to
      * XHTML or HTML (depending the given method) using the given output encoding.
-     *
-     * @param encoding output encoding, or <code>null</code> for the platform default
      */
-    private static TransformerHandler getTransformerHandler(OutputStream out, String method,
-                                                            String encoding)
+    private static TransformerHandler getTransformerHandler(OutputStream out)
         throws TransformerConfigurationException {
 
         TransformerHandler transformerHandler = SAX_TRANSFORMER_FACTORY.newTransformerHandler();
         Transformer transformer = transformerHandler.getTransformer();
-        transformer.setOutputProperty(OutputKeys.METHOD, method);
+        transformer.setOutputProperty(OutputKeys.METHOD, DEFAULT_OUTPUT_FORMAT);
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
-        if (encoding != null) {
-            transformer.setOutputProperty(OutputKeys.ENCODING, encoding);
-        }
+        transformer.setOutputProperty(OutputKeys.ENCODING, DEFAULT_ENCODING);
 
         transformerHandler.setResult(new StreamResult(new PrintStream(out)));
         return transformerHandler;

@@ -122,8 +122,7 @@ public class Page {
             return new byte[0];
         }
         try (InputStream is = entity.getContent()) {
-            int size = (int) entity.getContentLength();
-            int readBufferLength = size;
+            int readBufferLength = (int) entity.getContentLength();
 
             if (readBufferLength <= 0) {
                 readBufferLength = 4096;

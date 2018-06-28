@@ -1,4 +1,4 @@
-/**
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -645,29 +645,29 @@ public class CrawlConfig {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Crawl storage folder: " + getCrawlStorageFolder() + "\n");
-        sb.append("Resumable crawling: " + isResumableCrawling() + "\n");
-        sb.append("Max depth of crawl: " + getMaxDepthOfCrawling() + "\n");
-        sb.append("Max pages to fetch: " + getMaxPagesToFetch() + "\n");
-        sb.append("User agent string: " + getUserAgentString() + "\n");
-        sb.append("Include https pages: " + isIncludeHttpsPages() + "\n");
-        sb.append("Include binary content: " + isIncludeBinaryContentInCrawling() + "\n");
-        sb.append("Max connections per host: " + getMaxConnectionsPerHost() + "\n");
-        sb.append("Max total connections: " + getMaxTotalConnections() + "\n");
-        sb.append("Socket timeout: " + getSocketTimeout() + "\n");
-        sb.append("Max total connections: " + getMaxTotalConnections() + "\n");
-        sb.append("Max outgoing links to follow: " + getMaxOutgoingLinksToFollow() + "\n");
-        sb.append("Max download size: " + getMaxDownloadSize() + "\n");
-        sb.append("Should follow redirects?: " + isFollowRedirects() + "\n");
-        sb.append("Proxy host: " + getProxyHost() + "\n");
-        sb.append("Proxy port: " + getProxyPort() + "\n");
-        sb.append("Proxy username: " + getProxyUsername() + "\n");
-        sb.append("Thread monitoring delay: " + getThreadMonitoringDelaySeconds() + "\n");
-        sb.append("Thread shutdown delay: " + getThreadShutdownDelaySeconds() + "\n");
-        sb.append("Cleanup delay: " + getCleanupDelaySeconds() + "\n");
-        sb.append("Cookie policy: " + getCookiePolicy() + "\n");
-        sb.append("Respect nofollow: " + isRespectNoFollow() + "\n");
-        sb.append("Respect noindex: " + isRespectNoIndex() + "\n");
+        sb.append("Crawl storage folder: ").append(getCrawlStorageFolder()).append("\n");
+        sb.append("Resumable crawling: ").append(isResumableCrawling()).append("\n");
+        sb.append("Max depth of crawl: ").append(getMaxDepthOfCrawling()).append("\n");
+        sb.append("Max pages to fetch: ").append(getMaxPagesToFetch()).append("\n");
+        sb.append("User agent string: ").append(getUserAgentString()).append("\n");
+        sb.append("Include https pages: ").append(isIncludeHttpsPages()).append("\n");
+        sb.append("Include binary content: ").append(isIncludeBinaryContentInCrawling()).append("\n");
+        sb.append("Max connections per host: ").append(getMaxConnectionsPerHost()).append("\n");
+        sb.append("Max total connections: ").append(getMaxTotalConnections()).append("\n");
+        sb.append("Socket timeout: ").append(getSocketTimeout()).append("\n");
+        sb.append("Max total connections: ").append(getMaxTotalConnections()).append("\n");
+        sb.append("Max outgoing links to follow: ").append(getMaxOutgoingLinksToFollow()).append("\n");
+        sb.append("Max download size: ").append(getMaxDownloadSize()).append("\n");
+        sb.append("Should follow redirects?: ").append(isFollowRedirects()).append("\n");
+        sb.append("Proxy host: ").append(getProxyHost()).append("\n");
+        sb.append("Proxy port: ").append(getProxyPort()).append("\n");
+        sb.append("Proxy username: ").append(getProxyUsername()).append("\n");
+        sb.append("Thread monitoring delay: ").append(getThreadMonitoringDelaySeconds()).append("\n");
+        sb.append("Thread shutdown delay: ").append(getThreadShutdownDelaySeconds()).append("\n");
+        sb.append("Cleanup delay: ").append(getCleanupDelaySeconds()).append("\n");
+        sb.append("Cookie policy: ").append(getCookiePolicy()).append("\n");
+        sb.append("Respect nofollow: ").append(isRespectNoFollow()).append("\n");
+        sb.append("Respect noindex: ").append(isRespectNoIndex()).append("\n");
         return sb.toString();
     }
 }

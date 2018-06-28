@@ -1,4 +1,4 @@
-/**
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more contributor license
  * agreements. See the NOTICE file distributed with this work for additional information regarding
  * copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the
@@ -48,16 +48,9 @@ public class RobotstxtServer {
 
     protected PageFetcher pageFetcher;
 
-    private final int maxBytes;
-
     public RobotstxtServer(RobotstxtConfig config, PageFetcher pageFetcher) {
-        this(config, pageFetcher, 16384);
-    }
-
-    public RobotstxtServer(RobotstxtConfig config, PageFetcher pageFetcher, int maxBytes) {
         this.config = config;
         this.pageFetcher = pageFetcher;
-        this.maxBytes = maxBytes;
     }
 
     private static String getHost(URL url) {

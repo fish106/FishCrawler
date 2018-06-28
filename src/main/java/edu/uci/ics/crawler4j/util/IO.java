@@ -32,9 +32,13 @@ public class IO {
         return deleteFolderContents(folder) && folder.delete();
     }
 
-    public static boolean deleteFolderContents(File folder) throws NullPointerException {
+    public static boolean deleteFolderContents(File folder){
         logger.debug("Deleting content of: " + folder.getAbsolutePath());
         File[] files = folder.listFiles();
+        if(files == null)
+        {
+            return false;
+        }
         for (File file : files) {
             if (file.isFile()) {
                 if (!file.delete()) {

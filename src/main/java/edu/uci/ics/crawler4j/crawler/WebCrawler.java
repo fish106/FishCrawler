@@ -1,4 +1,4 @@
-/**
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -106,8 +106,8 @@ public class WebCrawler implements Runnable {
      *            the id of this crawler instance
      * @param crawlController
      *            the controller that manages this crawling session
-     * @throws IllegalAccessException
-     * @throws InstantiationException
+     * @throws IllegalAccessException the IllegalAccessException
+     * @throws InstantiationException the InstantiationException
      */
     public void init(int id, CrawlController crawlController)
         throws InstantiationException, IllegalAccessException {

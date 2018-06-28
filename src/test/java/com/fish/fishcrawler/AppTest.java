@@ -27,5 +27,8 @@ public class AppTest
         LanguageDetector detector = new OptimaizeLangDetector().loadModels();
         LanguageResult languageResult = detector.detect("Alla människor är födda fria och lika i värde och rättigheter.");
         System.out.println(languageResult.getLanguage());
+
+        StringBuilder sb = new StringBuilder();
+        System.out.println(sb.length());
     }
 }

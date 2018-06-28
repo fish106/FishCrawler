@@ -38,7 +38,7 @@ public class Net {
     private static Pattern initializePattern() {
         return Pattern.compile("\\b(((ht|f)tp(s?)\\:\\/\\/|~\\/|\\/)|www.)" +
                                "(\\w+:\\w+@)?(([-\\w]+\\.)+(com|org|net|gov" +
-                               "|mil|biz|info|mobi|name|aero|jobs|museum" +
+                               "|mil|biz|info|mobi|name|aero|jobs|museum|cn" +
                                "|travel|[a-z]{2}))(:[\\d]{1,5})?" +
                                "(((\\/([-\\w~!$+|.,=]|%[a-f\\d]{2})+)+|\\/)+|\\?|#)?" +
                                "((\\?([-\\w~!$+|.,*:]|%[a-f\\d{2}])+=?" +

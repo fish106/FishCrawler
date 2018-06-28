@@ -181,25 +181,36 @@ public class UserAgentDirectives {
      * @param value The value of the rule
      */
     public void add(String rule, String value) {
-        if (rule.equals("sitemap")) {
-            if (this.sitemap == null) {
-                this.sitemap = new ArrayList<String>();
-            }
-            this.sitemap.add(value);
-        } else if (rule.equals("crawl-delay")) {
-            try {
-                this.crawlDelay = Double.parseDouble(value);
-            } catch (NumberFormatException e) {
-                logger.warn("Invalid number format for crawl-delay robots.txt: {}", value);
-            }
-        } else if (rule.equals("host")) {
-            this.preferredHost = value;
-        } else if (rule.equals("allow")) {
-            this.pathRules.add(new PathRule(HostDirectives.ALLOWED, value));
-        } else if (rule.equals("disallow")) {
-            this.pathRules.add(new PathRule(HostDirectives.DISALLOWED, value));
-        } else {
-            logger.error("Invalid key in robots.txt passed to UserAgentRules: {}", rule);
+        switch (rule)
+        {
+            case "sitemap":
+                if (this.sitemap == null)
+                {
+                    this.sitemap = new ArrayList<String>();
+                }
+                this.sitemap.add(value);
+                break;
+            case "crawl-delay":
+                try
+                {
+                    this.crawlDelay = Double.parseDouble(value);
+                } catch (NumberFormatException e)
+                {
+                    logger.warn("Invalid number format for crawl-delay robots.txt: {}", value);
+                }
+                break;
+            case "host":
+                this.preferredHost = value;
+                break;
+            case "allow":
+                this.pathRules.add(new PathRule(HostDirectives.ALLOWED, value));
+                break;
+            case "disallow":
+                this.pathRules.add(new PathRule(HostDirectives.DISALLOWED, value));
+                break;
+            default:
+                logger.error("Invalid key in robots.txt passed to UserAgentRules: {}", rule);
+                break;
         }
     }
 

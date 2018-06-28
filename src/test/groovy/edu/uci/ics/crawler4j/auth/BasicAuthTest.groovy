@@ -1,4 +1,4 @@
-package edu.uci.ics.crawler4j.auth
+package edu.uci.ics.crawler4j.auth;
 
 import com.github.tomakehurst.wiremock.client.BasicCredentials
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration

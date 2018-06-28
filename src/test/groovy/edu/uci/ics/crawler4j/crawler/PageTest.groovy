@@ -23,6 +23,6 @@ class PageTest extends Specification {
         page.load(entity, 1024)
 
         then: "charset should fallback to UTF-8"
-        "UTF-8".equals(page.getContentCharset())
+        "UTF-8" == page.getContentCharset()
     }
 }
